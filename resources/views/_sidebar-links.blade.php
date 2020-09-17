@@ -44,15 +44,15 @@
         </a>
     </li>
 
-    <li class="relative">
-        <a
-            class="font-bold text-lg mb-4 block"
-            href="/notifications"
-            id="notify_link"
-        >
-            Notifications <span class="absolute content-center items-center text-center" style="top:4px; right:-10px;background-color:#ea3355;  width:20px; height:20px; font-size:12px; color:white; border-radius:100%;" >{{ auth()->user()->unreadNotifications->count() }}</span>
-        </a>
-    </li>
+{{--    <li class="relative">--}}
+{{--        <a--}}
+{{--            class="font-bold text-lg mb-4 block"--}}
+{{--            href="/notifications"--}}
+{{--            id="notify_link"--}}
+{{--        >--}}
+{{--            Notifications <span class="absolute content-center items-center text-center" style="top:4px; right:-10px;background-color:#ea3355;  width:20px; height:20px; font-size:12px; color:white; border-radius:100%;" >{{ auth()->user()->unreadNotifications->count() }}</span>--}}
+{{--        </a>--}}
+{{--    </li>--}}
 
     <li>
         <a

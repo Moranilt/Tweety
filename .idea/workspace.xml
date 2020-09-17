@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b1b9a40e-ff9b-4e78-847b-3afae28edd5b" name="Default Changelist" comment="" />
+    <list default="true" id="b1b9a40e-ff9b-4e78-847b-3afae28edd5b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TweetsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TweetsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/create()" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/_sidebar-links.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/_sidebar-links.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/chat/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/chat/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tweety.rar" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -133,6 +141,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -174,6 +183,7 @@
       <workItem from="1600103725209" duration="9803000" />
       <workItem from="1600151585484" duration="31247000" />
       <workItem from="1600244535766" duration="19068000" />
+      <workItem from="1600327525533" duration="3760000" />
     </task>
     <servers />
   </component>
@@ -201,6 +211,10 @@
       <screen x="0" y="0" width="1680" height="1010" />
     </state>
     <state x="670" y="228" key="NewPhpClassDialog/0.0.1680.1010@0.0.1680.1010" timestamp="1598883157136" />
+    <state x="341" y="150" key="SettingsEditor" timestamp="1600327549952">
+      <screen x="0" y="0" width="1680" height="1010" />
+    </state>
+    <state x="341" y="150" key="SettingsEditor/0.0.1680.1010@0.0.1680.1010" timestamp="1600327549952" />
     <state x="561" y="246" width="540" height="524" key="StructurePopup" timestamp="1598718327562">
       <screen x="0" y="0" width="1680" height="1010" />
     </state>
