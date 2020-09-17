@@ -8,6 +8,10 @@ use App\Tweet;
 
 class TweetsController extends Controller
 {
+    public function main()
+    {
+        return view('welcome');
+    }
 
     public function index()
     {

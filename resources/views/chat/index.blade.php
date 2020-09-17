@@ -1,5 +1,6 @@
 <x-app>
     @foreach($chats as $chat)
+        @if($chat->conversation->count() > 0)
         <a href="{{ route('chats.show', $chat->id ) }}">
         <div class="px-4 py-6 border-2 border-blue-200 my-4 w-full">
             <h2 class="font-bold text-blue-600 mb-2">{{ $chat->user()->get()->except(auth()->user()->id)->first()->username }}</h2>
@@ -24,5 +25,6 @@
             </div>
         </div>
         </a>
+        @endif
     @endforeach
 </x-app>
