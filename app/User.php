@@ -68,7 +68,7 @@ class User extends Authenticatable
     {
         $friends = $this->follows()->pluck('id');
 
-        $friendsTweets = Tweet::whereIn('user_id', $friends)->withLikes()->get();
+        $friendsTweets = Tweet::whereIn('user_id', $friends)->orWhere('user_id', current_user()->id)->withLikes()->get();
 
         foreach($friends as $friend){
             $friendsSharedTweetId = User::find($friend)->sharedTweets->pluck('id');

@@ -46,6 +46,29 @@
 
     </div>
 
+    <div id="tweet-edit-form" class="relative bg-white shadow-lg border border-gray-100 py-4 px-6" style="display:none; width:350px;position:fixed; left: 50%; transform: translateX(-50%) translateY(-50%);top: 50%;">
+        <div id="tweet-edit-form-close" class="absolute p-1 text-gray-600" style="right:20px; top:10px; cursor:pointer;">
+            <i class="fas fa-times"></i>
+        </div>
+        <h3 class="text-2xl font-bold mb-4">Edit tweet</h3>
+        <form method="POST">
+            @csrf
+            <textarea id="tweet-edit-body" class="mb-2 w-full border border-gray-300">
+
+            </textarea>
+
+            <input type="file" name="tweet-edit-photo" class="my-2" id="tweet-photo">
+
+            <img src="#" id="tweet-edit-photo-prev" style="display:none;width:50%;">
+
+            <button
+                type="submit"
+                class="bg-blue-500 rounded-lg shadow py-2 px-10 text-sm text-white mt-4 hover:bg-blue-600"
+            >
+                Save
+            </button>
+        </form>
+    </div>
 
 
 <script>
@@ -87,6 +110,66 @@
             });
 
         });
+
+    //Tweet dots (submenu)
+
+
+    $('.tweet-menu .menu-dots').click(function(){
+        let subMenu = $(this).parent().find('.sub-menu')
+        subMenu.toggle('fast', 'swing')
+
+        if($(this).find('i').hasClass('fa-ellipsis-h')){
+            $(this).find('i').removeClass('fa-ellipsis-h').addClass('fa-times')
+
+        }else if($(this).find('i').hasClass('fa-times')){
+            $(this).find('i').removeClass('fa-times').addClass('fa-ellipsis-h')
+        }
+
+    });
+
+    $('#tweet-edit-form #tweet-edit-form-close').click(function(){
+        $(this).parent().hide()
+    })
+
+    $(document).ready(function(){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $('.tweet-menu .sub-menu .tweet-edit').click(function(){
+            let tweet_id = $(this).attr('data-tweet-id')
+            let route = 'tweets/'+tweet_id+'/edit'
+
+            $('#tweet-edit-form').show();
+            $(this).parent().parent().toggle()
+
+            if($(this).parent().parent().parent().find('i').hasClass('fa-ellipsis-h')){
+                $(this).parent().parent().parent().find('i').removeClass('fa-ellipsis-h').addClass('fa-times')
+
+            }else if($(this).parent().parent().parent().find('i').hasClass('fa-times')){
+                $(this).parent().parent().parent().find('i').removeClass('fa-times').addClass('fa-ellipsis-h')
+            }
+
+            $.ajax({
+                url: route,
+                type: "GET",
+                data:{
+                    tweet_id:tweet_id
+                },
+                success: function(e){
+                    console.log(e)
+                    $('#tweet-edit-form').find('#tweet-edit-body').html(e.tweet.body)
+                    $('#tweet-edit-form').find('#tweet-edit-photo-prev').show().attr('src', '{{ asset('storage/')}}'+'/'+e.tweet.photo)
+
+                },
+                error: function(e){
+                    errorShow(e.responseJSON.errors);
+                }
+            })
+        });
+    })
 
 
 

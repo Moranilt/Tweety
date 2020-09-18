@@ -3,7 +3,27 @@
 
 
 
-<div class="flex p-4 {{$loop->last ? '' : 'border-b border-b-gray-400'}} ">
+<div class="relative flex p-4 {{$loop->last ? '' : 'border-b border-b-gray-400'}} ">
+
+    @can('update-tweet', $tweet)
+        <div class="absolute tweet-menu" style="right:30px;">
+            <div class="menu-dots text-gray-500 hover:text-gray-700 text-center"
+                 style="cursor:pointer;display:block;width:50px; line-height:50px; font-size:18px;">
+                <i class="fas fa-ellipsis-h"></i>
+            </div>
+
+            <div class="sub-menu bg-white text-sm shadow-lg border border-gray-100"
+                 style="width:150px; right:0; display:none; position:absolute;">
+                <ul>
+                    <li class="tweet-edit border-b border-gray-200 px-4 py-1 cursor-pointer hover:bg-gray-100"
+                        data-tweet-id="{{$tweet->id}}">Edit
+                    </li>
+                    <li class="tweet-delete px-4 py-1 cursor-pointer hover:bg-gray-100" data-tweet-id="{{$tweet->id}}">Delete</li>
+                </ul>
+            </div>
+        </div>
+
+    @endcan
 
     <div class="mr-2 flex-shrink-0">
         <a href="{{ route('profile', $tweet->user) }}">
@@ -18,6 +38,7 @@
     </div>
 
     <div class="">
+
         <a href="{{ route('profile', $tweet->user) }}">
             <h5 class="font-bold">{{ $tweet->user->name }}</h5>
         </a>

@@ -4,6 +4,7 @@
 
 
             <div class="flex p-6 border-b border-b-gray-400" style="flex-direction:column;">
+
                 <div class="flex">
                     <div class="mr-2 flex-shrink-0">
                         <a href="{{ route('profile', $tweet->pivotParent->sharedTweet->find($tweet->user_id)->username) }}">
@@ -42,6 +43,7 @@
                     </div>
 
                     <div class="">
+
                         <a href="{{ route('profile', App\User::find($tweet->pivotParent->user_id)) }}">
                             <h5 class="font-bold">{{ App\User::find($tweet->pivotParent->user_id)->name }}</h5>
                         </a>

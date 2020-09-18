@@ -1,14 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="b1b9a40e-ff9b-4e78-847b-3afae28edd5b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TweetsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TweetsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/create()" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/_sidebar-links.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/_sidebar-links.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/chat/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/chat/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/_timeline.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/_timeline.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/_timeline_profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/_timeline_profile.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/_tweet.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/_tweet.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/components/master.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/components/master.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tweety.rar" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -184,21 +205,25 @@
       <workItem from="1600151585484" duration="31247000" />
       <workItem from="1600244535766" duration="19068000" />
       <workItem from="1600327525533" duration="3760000" />
+      <workItem from="1600413221871" duration="12841000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
   <component name="WindowStateProjectService">
     <state x="608" y="307" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1600021020402">
       <screen x="0" y="0" width="1680" height="1010" />
     </state>
     <state x="608" y="307" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1680.1010@0.0.1680.1010" timestamp="1600021020402" />
-    <state x="570" y="260" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1600246733293">
+    <state x="570" y="260" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1600414957732">
       <screen x="0" y="0" width="1680" height="1010" />
     </state>
-    <state x="570" y="260" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1680.1010@0.0.1680.1010" timestamp="1600246733293" />
+    <state x="570" y="260" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1680.1010@0.0.1680.1010" timestamp="1600414957732" />
     <state x="619" y="316" key="#com.jetbrains.php.refactoring.pullPush.pullUp.PhpPullUpDialog#1" timestamp="1598883274919">
       <screen x="0" y="0" width="1680" height="1010" />
     </state>

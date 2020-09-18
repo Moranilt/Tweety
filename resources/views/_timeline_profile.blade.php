@@ -5,6 +5,7 @@
             <div class="flex p-6 border-b border-b-gray-400" style="flex-direction:column;">
                 <div class="flex">
                     <div class="mr-2 flex-shrink-0">
+                        @can('update-tweet', $tweet)<p>HELP</p>@endcan
                         <a href="{{ route('profile', $user->username) }}">
                             <img
                                 src="{{ $user->avatar }}"

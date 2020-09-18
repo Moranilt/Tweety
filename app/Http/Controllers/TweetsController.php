@@ -38,4 +38,9 @@ class TweetsController extends Controller
 
       return redirect()->route('home');
     }
+
+    public function edit(Tweet $tweet)
+    {
+        return response()->json(['tweet' => $tweet]);
+    }
 }
