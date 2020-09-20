@@ -51,9 +51,11 @@
             <i class="fas fa-times"></i>
         </div>
         <h3 class="text-2xl font-bold mb-4">Edit tweet</h3>
-        <form method="POST">
+        <form method="POST" enctype="multipart/form-data">
             @csrf
-            <textarea id="tweet-edit-body" class="mb-2 w-full border border-gray-300">
+            <input id="tweet-id-hidden" type="hidden" name="tweet-id">
+
+            <textarea id="tweet-edit-body" name="body" class="mb-2 w-full border border-gray-300">
 
             </textarea>
 
@@ -161,14 +163,89 @@
                 success: function(e){
                     console.log(e)
                     $('#tweet-edit-form').find('#tweet-edit-body').html(e.tweet.body)
-                    $('#tweet-edit-form').find('#tweet-edit-photo-prev').show().attr('src', '{{ asset('storage/')}}'+'/'+e.tweet.photo)
-
+                    $('#tweet-edit-form').find('#tweet-id-hidden').val(e.tweet.id)
+                    if(e.tweet.photo != null) {
+                        $('#tweet-edit-form').find('#tweet-edit-photo-prev').show().attr('src', '{{ asset('storage/')}}' + '/' + e.tweet.photo)
+                    }else{
+                        $('#tweet-edit-form').find('#tweet-edit-photo-prev').hide()
+                    }
                 },
                 error: function(e){
                     errorShow(e.responseJSON.errors);
                 }
             })
         });
+
+        $('#tweet-edit-form form').submit(function(e){
+            e.preventDefault();
+
+            let new_tweet_body = $(this).find('textarea').val()
+            let new_tweet_id = $(this).find('#tweet-id-hidden').val()
+            let route = 'tweets/'+new_tweet_id
+            let new_tweet_photo = null;
+            if($(this).find('#tweet-photo').val()){
+                new_tweet_photo = $(this).find('#tweet-photo')[0].files[0]
+            }
+            console.log(new_tweet_photo)
+
+
+            $.ajax({
+                url: route,
+                type: "PATCH",
+                data: {
+                    tweet_id: new_tweet_id,
+                    body: new_tweet_body
+                },
+                success: function (e) {
+                    console.log(e)
+                },
+                error: function (e) {
+                    errorShow(e.responseJSON.errors)
+                }
+            })
+
+            // if(new_tweet_photo !== null) {
+            //     $.ajax({
+            //         url: route,
+            //         type: "PATCH",
+            //         data: {
+            //             tweet_id: new_tweet_id,
+            //             body: new_tweet_body,
+            //             photo: new_tweet_photo
+            //
+            //         },
+            //         contentType: false,
+            //         processData: false,
+            //         cache:false,
+            //         success: function (e) {
+            //             console.log('UPDATED')
+            //         },
+            //         error: function (e) {
+            //             errorShow(e.responseJSON.errors)
+            //         }
+            //     })
+            // }else{
+            //     $.ajax({
+            //         url: route,
+            //         type: "PATCH",
+            //         data:{
+            //             tweet_id:new_tweet_id,
+            //             body:new_tweet_body
+            //         },
+            //         success:function(e){
+            //             console.log(e)
+            //         },
+            //         error:function(e){
+            //             errorShow(e.responseJSON.errors)
+            //         }
+            //     })
+            // }
+
+
+
+
+
+        })
     })
 
 

@@ -43,4 +43,20 @@ class TweetsController extends Controller
     {
         return response()->json(['tweet' => $tweet]);
     }
+
+    public function update(Tweet $tweet)
+    {
+
+        $attributes = request()->validate([
+            'body' => ['required'],
+            'photo' => ['file']
+        ]);
+
+        if(request('photo')){
+            $attributes['photo'] = request('photo')->store('avatars');
+        }
+
+        $tweet->update($attributes);
+        return response()->json(['message' => 'SUCCESS']);
+    }
 }

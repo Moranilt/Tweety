@@ -37,7 +37,7 @@
         </a>
     </div>
 
-    <div class="">
+    <div class="tweet-content" style="width:100%">
 
         <a href="{{ route('profile', $tweet->user) }}">
             <h5 class="font-bold">{{ $tweet->user->name }}</h5>
@@ -46,15 +46,17 @@
             {{ $tweet->created_at->diffForHumans() }}
         </span>
 
-        <p>
-            @isset($tweet->photo)
-                <img src="{{ asset('storage/'.$tweet->photo) }}" alt="your photo">
-            @endisset
-        </p>
+        <div class="tweet-body">
+            <p class="tweet-photo">
+                @isset($tweet->photo)
+                    <img src="{{ asset('storage/'.$tweet->photo) }}" alt="your photo">
+                @endisset
+            </p>
 
-        <p class="text-sm mb-3 mt-4">
-            {{ $tweet->body }}
-        </p>
+            <div class="text-sm mb-3 mt-4" style="width:100%;">
+                {{ $tweet->body }}
+            </div>
+        </div>
 
         <div class="flex">
             <x-like-buttons :tweet="$tweet">
