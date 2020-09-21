@@ -59,4 +59,11 @@ class TweetsController extends Controller
         $tweet->update($attributes);
         return response()->json(['message' => 'SUCCESS']);
     }
+
+    public function delete(Tweet $tweet)
+    {
+        $tweet->delete();
+
+        return response()->json(['message' => 'Deleted success']);
+    }
 }

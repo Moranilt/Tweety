@@ -16,7 +16,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
+    <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
     <!-- Styles -->
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
 </head>
@@ -55,13 +55,15 @@
             @csrf
             <input id="tweet-id-hidden" type="hidden" name="tweet-id">
 
-            <textarea id="tweet-edit-body" name="body" class="mb-2 w-full border border-gray-300">
+{{--            <textarea id="tweet-edit-body" name="body" class="mb-2 w-full border border-gray-300">--}}
 
-            </textarea>
+{{--            </textarea>--}}
 
-            <input type="file" name="tweet-edit-photo" class="my-2" id="tweet-photo">
+            <textarea id="tweet-edit-body" name="editor1"></textarea>
 
-            <img src="#" id="tweet-edit-photo-prev" style="display:none;width:50%;">
+{{--            <input type="file" name="tweet-edit-photo" class="my-2" id="tweet-photo">--}}
+
+{{--            <img src="#" id="tweet-edit-photo-prev" style="display:none;width:50%;">--}}
 
             <button
                 type="submit"
@@ -74,10 +76,14 @@
 
 
 <script>
-    // Echo.channel('subscribtion')
-    //     .listen('UserFollowed', (e) => {
-    //         console.log(e);
-    //     });
+
+
+    let ckeditor = CKEDITOR.replace( 'editor1' );
+
+        CKEDITOR.replace('body');
+
+
+
     var userId = '{{ auth()->user() ? auth()->user()->id : '' }}';
     Echo.private(`user.${userId}`)
         .listen('UserFollowed', (e) => {
@@ -140,6 +146,34 @@
             }
         });
 
+        $('.tweet-menu .sub-menu .tweet-delete').click(function(){
+            let tweet_id = $(this).attr('data-tweet-id')
+            let route = 'tweets/'+tweet_id
+            $(this).parent().parent().toggle()
+            if($(this).parent().parent().parent().find('i').hasClass('fa-ellipsis-h')){
+                $(this).parent().parent().parent().find('i').removeClass('fa-ellipsis-h').addClass('fa-times')
+
+            }else if($(this).parent().parent().parent().find('i').hasClass('fa-times')){
+                $(this).parent().parent().parent().find('i').removeClass('fa-times').addClass('fa-ellipsis-h')
+            }
+
+            $.ajax({
+                url:route,
+                type:'DELETE',
+                data:{
+                    tweet_id:tweet_id
+                },
+                success: function(e){
+                    succShow(e)
+                    $('.tweet[data-tweet-id='+tweet_id+']').remove()
+                },
+                error:function(e){
+                    errorShow(e.responseJSON.errors);
+                }
+            })
+
+        })
+
         $('.tweet-menu .sub-menu .tweet-edit').click(function(){
             let tweet_id = $(this).attr('data-tweet-id')
             let route = 'tweets/'+tweet_id+'/edit'
@@ -162,13 +196,14 @@
                 },
                 success: function(e){
                     console.log(e)
-                    $('#tweet-edit-form').find('#tweet-edit-body').html(e.tweet.body)
+                    //$('#tweet-edit-form').find('#tweet-edit-body').html(e.tweet.body)
+                    ckeditor.setData(e.tweet.body)
                     $('#tweet-edit-form').find('#tweet-id-hidden').val(e.tweet.id)
-                    if(e.tweet.photo != null) {
-                        $('#tweet-edit-form').find('#tweet-edit-photo-prev').show().attr('src', '{{ asset('storage/')}}' + '/' + e.tweet.photo)
-                    }else{
-                        $('#tweet-edit-form').find('#tweet-edit-photo-prev').hide()
-                    }
+                    {{--if(e.tweet.photo != null) {--}}
+                    {{--    $('#tweet-edit-form').find('#tweet-edit-photo-prev').show().attr('src', '{{ asset('storage/')}}' + '/' + e.tweet.photo)--}}
+                    {{--}else{--}}
+                    {{--    $('#tweet-edit-form').find('#tweet-edit-photo-prev').hide()--}}
+                    {{--}--}}
                 },
                 error: function(e){
                     errorShow(e.responseJSON.errors);
@@ -179,14 +214,13 @@
         $('#tweet-edit-form form').submit(function(e){
             e.preventDefault();
 
-            let new_tweet_body = $(this).find('textarea').val()
+            let new_tweet_body = ckeditor.getData()
             let new_tweet_id = $(this).find('#tweet-id-hidden').val()
             let route = 'tweets/'+new_tweet_id
-            let new_tweet_photo = null;
-            if($(this).find('#tweet-photo').val()){
-                new_tweet_photo = $(this).find('#tweet-photo')[0].files[0]
-            }
-            console.log(new_tweet_photo)
+            // let new_tweet_photo = null;
+            // if($(this).find('#tweet-photo').val()){
+            //     new_tweet_photo = $(this).find('#tweet-photo')[0].files[0]
+            // }
 
 
             $.ajax({
@@ -197,7 +231,12 @@
                     body: new_tweet_body
                 },
                 success: function (e) {
-                    console.log(e)
+                    succShow(e)
+                    $('#tweet-edit-form').hide()
+
+                        $('.tweet[data-tweet-id='+new_tweet_id+'] .tweet-body').load(' .tweet[data-tweet-id='+new_tweet_id+'] .tweet-body .text-sm')
+
+
                 },
                 error: function (e) {
                     errorShow(e.responseJSON.errors)

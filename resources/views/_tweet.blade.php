@@ -3,7 +3,7 @@
 
 
 
-<div class="relative flex p-4 {{$loop->last ? '' : 'border-b border-b-gray-400'}} ">
+<div class="tweet relative flex p-4 {{$loop->last ? '' : 'border-b border-b-gray-400'}} " data-tweet-id="{{ $tweet->id }}">
 
     @can('update-tweet', $tweet)
         <div class="absolute tweet-menu" style="right:30px;">
@@ -47,14 +47,14 @@
         </span>
 
         <div class="tweet-body">
-            <p class="tweet-photo">
-                @isset($tweet->photo)
-                    <img src="{{ asset('storage/'.$tweet->photo) }}" alt="your photo">
-                @endisset
-            </p>
+{{--            <p class="tweet-photo">--}}
+{{--                @isset($tweet->photo)--}}
+{{--                    <img src="{{ asset('storage/'.$tweet->photo) }}" alt="your photo">--}}
+{{--                @endisset--}}
+{{--            </p>--}}
 
             <div class="text-sm mb-3 mt-4" style="width:100%;">
-                {{ $tweet->body }}
+                {!! $tweet->body !!}
             </div>
         </div>
 

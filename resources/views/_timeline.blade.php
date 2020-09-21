@@ -1,4 +1,4 @@
-<div class="border border-gray-300 rounded-lg">
+<div id="all-tweets" class="border border-gray-300 rounded-lg">
     @forelse($tweets as $tweet)
         @if($tweet->pivotParent)
 
@@ -51,14 +51,14 @@
                          {{ $tweet->pivotParent->created_at->diffForHumans() }}
                     </span>
 
-                        <p>
-                            @isset($tweet->pivotParent->photo)
-                                <img src="{{ asset('storage/'.$tweet->pivotParent->photo) }}" alt="your photo">
-                            @endisset
-                        </p>
+{{--                        <p>--}}
+{{--                            @isset($tweet->pivotParent->photo)--}}
+{{--                                <img src="{{ asset('storage/'.$tweet->pivotParent->photo) }}" alt="your photo">--}}
+{{--                            @endisset--}}
+{{--                        </p>--}}
 
                         <p class="text-sm mb-3 mt-4">
-                            {{ $tweet->pivotParent->body }}
+                            {!!  $tweet->pivotParent->body !!}
                         </p>
 
                         <div class="flex">

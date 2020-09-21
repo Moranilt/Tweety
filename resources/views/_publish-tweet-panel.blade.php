@@ -10,7 +10,7 @@
       autofocus
     ></textarea>
 
-    <input type="file" name="photo" class="my-2" id="tweet-photo">
+{{--    <input type="file" name="photo" class="my-2" id="tweet-photo">--}}
 
 
       <img src="#" id="photo-prev" style="display:none;">

@@ -21,6 +21,7 @@ Route::middleware('auth')->group(function() {
   Route::get('/tweets/{tweet}', 'TweetsController@show');
   Route::get('/tweets/{tweet}/edit', 'TweetsController@edit');
   Route::patch('/tweets/{tweet}', 'TweetsController@update');
+  Route::delete('/tweets/{tweet}', 'TweetsController@delete');
 
   Route::get('/chats', 'ChatsController@index')->name('chats.all');
   Route::post('/chats/{user:username}', 'ChatsController@create')->name('chats.create');
