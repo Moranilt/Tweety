@@ -61,33 +61,40 @@ class User extends Authenticatable
 
     public function getAvatarAttribute($value)
     {
-      return asset($value ? "/storage/{$value}" : '/images/default-avatar.jpeg');
+        return asset($value ? "/storage/{$value}" : '/images/default-avatar.jpeg');
     }
 
+    /**
+     * Create a timeline of tweets
+     *
+     * @return collection of posts with shared posts of your friends
+     */
     public function timeline()
     {
         $friends = $this->follows()->pluck('id');
 
         $friendsTweets = Tweet::whereIn('user_id', $friends)->orWhere('user_id', current_user()->id)->withLikes()->get();
 
-        foreach($friends as $friend){
+        foreach ($friends as $friend) {
             $friendsSharedTweetId = User::find($friend)->sharedTweets->pluck('id');
 
-            $tweets = Tweet::withCount(['likes' => function(Builder $query){
-                        $query->where('liked', '=', '1');
-                    }])->whereIn('id', $friendsSharedTweetId)->get();
-
-                foreach ($tweets as $tweet) {
-                    $pivot = $tweet->sharedTweet->pluck('pivot');
-
-                        foreach ($pivot->all() as $p) {
-                            if($p->user_id != current_user()->id){
-                                Arr::add($tweet, 'sharedPivot', $p);
-                            }
-                        }
-                    $friendsTweets->push($tweet->sharedPivot);
+            $tweets = Tweet::withCount(
+                ['likes' => function (Builder $query) {
+                    $query->where('liked', '=', '1');
                 }
+                ]
+            )->whereIn('id', $friendsSharedTweetId)->get();
 
+            foreach ($tweets as $tweet) {
+                $pivot = $tweet->sharedTweet->pluck('pivot');
+
+                foreach ($pivot->all() as $p) {
+                    if ($p->user_id != current_user()->id) {
+                        Arr::add($tweet, 'sharedPivot', $p);
+                    }
+                }
+                $friendsTweets->push($tweet->sharedPivot);
+            }
         }
 
         return (new Collection($friendsTweets->sortByDesc('created_at')))->paginate(5);
@@ -95,38 +102,43 @@ class User extends Authenticatable
 
 
 
-//      $friends = $this->follows()->pluck('id');
-//      $sharedTweets = $this->sharedTweets()->pluck('tweet_id');
-//      $tweets=[];
-//        foreach($friends as $friend)
-//        {
-//            $tweets[] = $this->find($friend)->sharedTweets->pluck('id');
-//        }
-//
-//        return Tweet::whereIn('user_id', $friends)
-//            ->orWhere('user_id', $this->id)
-//            ->orWhereIn('id', $sharedTweets)
-//            ->orWhereIn('id', $tweets)
-//            ->withLikes()
-//            ->latest()
-//            ->paginate(5);
+        //      $friends = $this->follows()->pluck('id');
+        //      $sharedTweets = $this->sharedTweets()->pluck('tweet_id');
+        //      $tweets=[];
+        //        foreach($friends as $friend)
+        //        {
+        //            $tweets[] = $this->find($friend)->sharedTweets->pluck('id');
+        //        }
+        //
+        //        return Tweet::whereIn('user_id', $friends)
+        //            ->orWhere('user_id', $this->id)
+        //            ->orWhereIn('id', $sharedTweets)
+        //            ->orWhereIn('id', $tweets)
+        //            ->withLikes()
+        //            ->latest()
+        //            ->paginate(5);
     }
 
+    /**
+     * Tweets relationship
+     *
+     * @return relationship
+     */
     public function tweets()
     {
-      return $this->hasMany(Tweet::class)->latest();
+        return $this->hasMany(Tweet::class)->latest();
     }
 
     public function path($append = '')
     {
-      $path = route('profile', $this->username);
+        $path = route('profile', $this->username);
 
-      return $append ? "{$path}/{$append}" : $path;
+        return $append ? "{$path}/{$append}" : $path;
     }
 
-//    public function setPasswordAttribute($value)
-//    {
-//      $this->attributes['password'] = bcrypt($value);
-//    }
+    //    public function setPasswordAttribute($value)
+    //    {
+    //      $this->attributes['password'] = bcrypt($value);
+    //    }
 
 }
